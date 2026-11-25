@@ -228,14 +228,14 @@ game itself, never from porting the C++ move graph.
   so this is the cheapest item here. Give `BreakthroughGame` its numbering as a
   field rather than copying the file, which would leave two move generators to
   keep in step.
-- `othello_` — needs `validate_result` as well as moves: the game ends when
+- `othello_` — needs `validate_outcome` as well as moves: the game ends when
   neither side can place, the winner is whoever has more discs, and equal
   counts draw, so the normal play default in `game.rs` is wrong for it. The
   pass rule also means "no moves for the side to move" is not a terminal
   condition at all. No C++ `validate_moves` exists either, so the Rust would be
   the only oracle othello has.
 - `chess+0`, `chess+1`, `chess+2*` — the largest by far (`ChessGame.cpp` is
-  1502 lines) and the other game needing `validate_result`: an empty move list
+  1502 lines) and the other game needing `validate_outcome`: an empty move list
   is checkmate or stalemate depending on whether the king is attacked.
 
 As each lands, shrink `NOT_PORTED` in `registry.rs`, the coverage note in

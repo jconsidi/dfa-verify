@@ -43,7 +43,7 @@ It includes a config driven check of the rules themselves, `dfa-games/tests/conf
 
 - `moves.json` — `expected_moves`, compared as a set.
 - `perft_u.json` — `expected_perft_u`, distinct positions per depth, which covers every configured size without storing full move lists.
-- `results.json` — `expected_result`, what `validate_result` returns: the result at a terminal position for the side to move, or null if the position is not terminal.
+- `results.json` — `expected_result`, what `validate_outcome` returns: the result at a terminal position for the side to move, or null if the position is not terminal.
   It is not the value under optimal play; that is what the solver's DFAs claim and the verifiers check.
 
 The schema is strict on purpose: an unknown or missing field, a duplicate position in a file, an unrecognized file under `config/`, or a game the Rust cannot build fails the run rather than being skipped, since test data that never executes is worse than none.
@@ -60,7 +60,7 @@ Name the commit in the commit message of an import.
   `layout.rs` owns every byte offset, so the reader and writer cannot drift.
   `Dfa::positions()` in `iter.rs` is the port of `DFAIterator` and enumerates accepted strings in lexicographic order.
   Binaries: `dfa-validate`, `dfa-stats`, `dfa-verify-union`.
-- `dfa-games` — position level rules (`validate_moves`, `validate_result`, `position_to_string`) and the verifiers over them.
+- `dfa-games` — position level rules (`validate_moves`, `validate_outcome`, `position_to_string`) and the verifiers over them.
   Binaries: `verify-lost-sound`, `verify-won-sound`, `verify-losing-sound`, `verify-winning-sound`, `verify-backward-sound`, taking the same arguments as their C++ namesakes.
 
 ## Running against solver output
@@ -90,7 +90,7 @@ Coverage is narrower than the C++ and the gaps matter:
   Rules must not treat such a position as a failure: tictactoe stops the side to move only on the *opponent's* line for exactly this reason.
 - Neither implementation's losing and winning verifiers consult `lost,side_to_move=N` or `won,side_to_move=N`.
   Both decide terminal positions from the rules, but they branch differently.
-  The Rust generates each position's moves once, and an empty move list branches to `validate_result`, which must return the base case the DFA asserts.
+  The Rust generates each position's moves once, and an empty move list branches to `validate_outcome`, which must return the base case the DFA asserts.
   The C++ asks `validate_outcome` first: a terminal result must be -1 in a losing DFA and 1 in a winning DFA, and any other result fails; a position with no result has its moves checked.
   Neither verifier cross checks the `lost` DFA as a side effect, so keep running `verify-lost-sound` on `lost,side_to_move=N` itself.
 

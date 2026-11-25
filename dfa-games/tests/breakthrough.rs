@@ -158,7 +158,7 @@ fn reaching_the_far_row_ends_the_game() {
         "....",
     ]);
     assert!(game.validate_moves(0, &position).is_empty());
-    assert_eq!(game.validate_result(0, &position, &[]), Some(-1));
+    assert_eq!(game.validate_outcome(0, &position, &[]), Some(-1));
 
     // The mirror: w on row 3 ends it for side 1.
     let mirrored = board([
@@ -168,7 +168,7 @@ fn reaching_the_far_row_ends_the_game() {
         "w...",
     ]);
     assert!(game.validate_moves(1, &mirrored).is_empty());
-    assert_eq!(game.validate_result(1, &mirrored, &[]), Some(-1));
+    assert_eq!(game.validate_outcome(1, &mirrored, &[]), Some(-1));
 }
 
 #[test]
@@ -200,5 +200,5 @@ fn a_position_with_no_pieces_is_lost() {
     let position = board(["....", "....", "....", "...."]);
     let moves = game.validate_moves(0, &position);
     assert!(moves.is_empty());
-    assert_eq!(game.validate_result(0, &position, &moves), Some(-1));
+    assert_eq!(game.validate_outcome(0, &position, &moves), Some(-1));
 }

@@ -5,7 +5,7 @@
 //! side to move is always 0.
 //!
 //! A puzzle has no opponent to lose to and never runs out of moves, so
-//! `validate_result` never reports a result, as `Puzzle::validate_outcome`
+//! `validate_outcome` never reports a result, as `Puzzle::validate_outcome`
 //! does not. Being solved is a property of the position, not the end of a
 //! two-player game, and the verifiers refuse one-player games outright.
 //!
@@ -103,7 +103,7 @@ impl Game for SlidingTilePuzzle {
         output
     }
 
-    fn validate_result(
+    fn validate_outcome(
         &self,
         _side_to_move: Side,
         _position: &Position,

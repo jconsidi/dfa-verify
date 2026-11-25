@@ -153,5 +153,5 @@ fn an_amazon_with_nowhere_to_go_is_lost() {
 
     let moves = game.validate_moves(0, &position);
     assert!(moves.is_empty());
-    assert_eq!(game.validate_result(0, &position, &moves), Some(-1));
+    assert_eq!(game.validate_outcome(0, &position, &moves), Some(-1));
 }

@@ -5,7 +5,7 @@
 //! rules for general `N`, and running the verifiers over the solver's own
 //! output is what holds the two together.
 //!
-//! Not normal play, so `validate_result` is implemented rather than
+//! Not normal play, so `validate_outcome` is implemented rather than
 //! inherited: out of moves is a loss when the opponent has a line and a draw
 //! when the board is simply full.
 //!
@@ -106,7 +106,7 @@ impl Game for TicTacToeGame {
 
     /// The board decides, not the move list: both a completed enemy line and a
     /// full board leave no moves, and they are different results.
-    fn validate_result(
+    fn validate_outcome(
         &self,
         side_to_move: Side,
         position: &Position,

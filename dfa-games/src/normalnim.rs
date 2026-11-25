@@ -7,7 +7,7 @@
 //! A move takes any positive number of tokens from exactly one heap. Both
 //! sides always have the same moves — nothing on the board belongs to either
 //! of them — so `side_to_move` is unused. Out of moves is a loss, which is
-//! what "normal" distinguishes from misère nim, so the `validate_result`
+//! what "normal" distinguishes from misère nim, so the `validate_outcome`
 //! default is the whole result rule.
 //!
 //! Encoding, which is shared with the C++ and cannot be derived:

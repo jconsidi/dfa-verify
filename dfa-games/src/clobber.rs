@@ -7,7 +7,7 @@
 //!
 //! Every piece sits on an orthogonal grid and the only move is onto an
 //! adjacent enemy piece, which is replaced. Out of moves is a loss, so the
-//! `validate_result` default is the whole result rule.
+//! `validate_outcome` default is the whole result rule.
 //!
 //! Encoding, which is shared with the C++ and cannot be derived: `W * H`
 //! layers of 3 characters, square `x + width * y`, 0 empty, 1 first player,

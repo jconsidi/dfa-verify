@@ -3,7 +3,7 @@
 //! Rules from `GAMES.md`, not from the C++. Every move covers two orthogonally
 //! adjacent empty squares with a domino, and the dominoes belong to no one, so
 //! both sides have the same moves. Out of moves is a loss, so the
-//! `validate_result` default is the whole result rule.
+//! `validate_outcome` default is the whole result rule.
 //!
 //! Encoding, which is shared with the C++ and cannot be derived: `W * H`
 //! layers of 2 characters, square `x + width * y`, 0 empty, 1 covered.

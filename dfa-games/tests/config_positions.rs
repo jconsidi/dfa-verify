@@ -269,7 +269,7 @@ fn check_result(game: &dyn Game, case: &Case) {
     };
 
     let moves = game.validate_moves(case.side_to_move, &case.position);
-    let result = game.validate_result(case.side_to_move, &case.position, &moves);
+    let result = game.validate_outcome(case.side_to_move, &case.position, &moves);
     assert_eq!(
         result,
         expected_result,

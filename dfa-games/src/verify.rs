@@ -2,7 +2,7 @@
 //!
 //! Port of `src/verify_utils.cpp`.  Each verifier takes a DFA that claims
 //! something about every position in it and checks that claim against
-//! `Game::validate_moves` / `validate_result`, which know nothing about DFAs.
+//! `Game::validate_moves` / `validate_outcome`, which know nothing about DFAs.
 //!
 //! # Terminal positions
 //!
@@ -12,7 +12,7 @@
 //! several scratch directories never had `lost,side_to_move=1` built at all.
 //!
 //! Instead every position generates its moves once, and the empty move list is
-//! the branch to the terminal check, where `validate_result` must return the
+//! the branch to the terminal check, where `validate_outcome` must return the
 //! base case the DFA asserts.  The C++ branches on `validate_outcome` instead:
 //! a terminal result must match the DFA's claim, and a position with no result
 //! has its moves checked.
@@ -84,7 +84,7 @@ pub enum Continuation<'a> {
 
 /// What a DFA asserts about every position in it.
 pub struct Claim<'a> {
-    /// What `validate_result` must return at a terminal position.
+    /// What `validate_outcome` must return at a terminal position.
     pub terminal_result: i32,
     pub continuation: Continuation<'a>,
 }
@@ -110,7 +110,7 @@ pub fn check_position(
 
     if moves.is_empty() {
         let expected = claim.terminal_result;
-        match game.validate_result(side_to_move, position, &moves) {
+        match game.validate_outcome(side_to_move, position, &moves) {
             Some(actual) if actual == expected => Ok(()),
             Some(actual) => bail!(
                 "{}has no moves, but the result is {actual} ({}) where this DFA claims {expected} ({})",

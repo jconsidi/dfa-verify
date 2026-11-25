@@ -2,7 +2,7 @@
 //!
 //! This is the part with no counterpart in the C++, which instead consults the
 //! `lost` and `won` DFAs, so nothing else covers it. A stub game makes the two
-//! branches observable: it counts calls to `validate_result` and returns
+//! branches observable: it counts calls to `validate_outcome` and returns
 //! whatever the test wants.
 
 use std::path::Path;
@@ -16,7 +16,7 @@ use tempfile::TempDir;
 struct Stub {
     /// Returned by `validate_moves` when the position starts with a 1.
     moves: Vec<Vec<u32>>,
-    /// Returned by `validate_result`.
+    /// Returned by `validate_outcome`.
     result: Option<i32>,
     result_calls: AtomicUsize,
 }
@@ -52,7 +52,7 @@ impl Game for Stub {
         }
     }
 
-    fn validate_result(
+    fn validate_outcome(
         &self,
         _side: Side,
         _position: &Position,
@@ -169,7 +169,7 @@ fn some_move_must_be_in_the_other_dfa() {
 #[test]
 fn a_terminal_position_satisfies_a_losing_claim_without_touching_the_other_dfa() {
     // The substitution for the C++ lost-DFA shortcut: a position with no moves
-    // is accepted on the strength of validate_result alone.
+    // is accepted on the strength of validate_outcome alone.
     let tmp = TempDir::new().unwrap();
     let dfa = only_eleven(&tmp);
     let claim = Claim {

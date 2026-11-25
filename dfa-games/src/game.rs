@@ -1,7 +1,7 @@
 //! The position level rules a verifier checks DFAs against.
 //!
 //! This is the part of `src/Game.h` that verification needs, and only that
-//! part: `validate_moves`, `validate_result` and `position_to_string`.  Move
+//! part: `validate_moves`, `validate_outcome` and `position_to_string`.  Move
 //! *graphs*, which is how the C++ builds DFAs, are not here and are not needed
 //! — the verifiers only read DFAs.
 
@@ -36,13 +36,13 @@ pub trait Game: Send + Sync {
     /// follow from the move list (chess, where an empty list is checkmate or
     /// stalemate depending on whether the king is attacked) overrides this and
     /// ignores the argument.
-    fn validate_result(
+    fn validate_outcome(
         &self,
         _side_to_move: Side,
         _position: &Position,
         moves: &[Vec<u32>],
     ) -> Option<i32> {
-        // NormalPlayGame::validate_result: out of moves is a loss.
+        // NormalPlayGame::validate_outcome: out of moves is a loss.
         if moves.is_empty() {
             Some(-1)
         } else {
