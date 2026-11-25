@@ -39,13 +39,20 @@ Run
 before committing, and never hand-wrap around rustfmt — if a line reads badly after formatting, change the code, not the whitespace.
 
 `cargo test` needs nothing outside this repository.
-It includes a config driven check of the rules themselves: `config/<game>/positions-manual.json` holds hand written positions with `expected_moves` and `expected_result`, read by `dfa-games/tests/positions_manual.rs`.
-The same test reads `positions-generated.json` and checks its `expected_perft_u` counts against the Rust rules, which covers every configured size without storing full move lists.
-A file naming a game the Rust cannot build fails the run rather than being skipped, since test data that never executes is worse than none.
+It includes a config driven check of the rules themselves, `dfa-games/tests/config_positions.rs`, reading `config/<game>/` with one file per kind of check:
 
-`config/` holds only those two files per game, copied from dfa-games at the split commit; the rest of dfa-games `config/` serves the C++.
-The paths match dfa-games, so new positions written there can be copied over as is.
-Record the source commit in the commit message when re-syncing.
+- `moves.json` — `expected_moves`, compared as a set.
+- `perft_u.json` — `expected_perft_u`, distinct positions per depth, which covers every configured size without storing full move lists.
+- `results.json` — `expected_result`, what `validate_result` returns: the result at a terminal position for the side to move, or null if the position is not terminal.
+  It is not the value under optimal play; that is what the solver's DFAs claim and the verifiers check.
+
+The schema is strict on purpose: an unknown or missing field, a duplicate position in a file, an unrecognized file under `config/`, or a game the Rust cannot build fails the run rather than being skipped, since test data that never executes is worse than none.
+Keep it strict when adding a kind of check: a new file name, a new constant in the test, and a new arm in `scripts/import-positions.py`.
+
+`scripts/import-positions.py <dfa-games checkout> <commit> [game ...]` imports positions from dfa-games, where new games usually get theirs first.
+It reads that commit through git, splits each case by kind, and merges by position and side to move, stopping without writing anything on a conflict.
+Positions added here have no `source`; imported ones carry `"source": "dfa-games <sha>"`.
+Name the commit in the commit message of an import.
 
 ## Crates
 

@@ -1,0 +1,12 @@
+{
+  "game": "slidingtile_2x2",
+  "positions": [
+    {
+      "comment": "won position",
+      "position": [1, 2, 3, 0],
+      "side_to_move": 0,
+      "expected_perft_u": [2, 3],
+      "source": "dfa-games ef1bcd7c23d47a979f5856e998a236d0b9cf8e2b"
+    }
+  ]
+}

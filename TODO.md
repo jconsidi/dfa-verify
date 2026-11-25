@@ -252,7 +252,7 @@ verifiers worth running.
 
 Re-derive both from their `GAMES.md` sections without the C++ open, then run
 the verifiers over the same DFAs and treat any disagreement as a finding rather
-than a bug in the rewrite. Add `config/<game>/positions-manual.json` for each
+than a bug in the rewrite. Add `config/<game>/moves.json` for each
 while doing it: neither game has hand written positions today, and amazons in
 particular has a move rule (queen slide plus arrow, both needing a clear path,
 the arrow allowed back into the vacated square) with several ways to be subtly

@@ -1,0 +1,19 @@
+{
+  "game": "cram_5x6",
+  "positions": [
+    {
+      "comment": "initial position",
+      "position": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "side_to_move": 0,
+      "expected_result": null,
+      "source": "dfa-games ef1bcd7c23d47a979f5856e998a236d0b9cf8e2b"
+    },
+    {
+      "comment": "initial position",
+      "position": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "side_to_move": 1,
+      "expected_result": null,
+      "source": "dfa-games ef1bcd7c23d47a979f5856e998a236d0b9cf8e2b"
+    }
+  ]
+}
