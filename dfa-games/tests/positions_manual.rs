@@ -23,8 +23,8 @@ use dfa_games::get_game;
 use serde_json::Value;
 
 fn config_dir() -> PathBuf {
-    // CARGO_MANIFEST_DIR is rust/dfa-games, and config/ is at the repo root.
-    Path::new(env!("CARGO_MANIFEST_DIR")).join("../../config")
+    // CARGO_MANIFEST_DIR is dfa-games/, and config/ is at the repo root.
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("../config")
 }
 
 /// Every game directory carrying `filename`, as `get_test_game_names` scans
